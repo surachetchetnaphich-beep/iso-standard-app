@@ -17,7 +17,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-build-placeholder-key-12345')
 DEBUG = env('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
