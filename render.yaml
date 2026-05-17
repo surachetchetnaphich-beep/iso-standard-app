@@ -4,7 +4,7 @@ services:
     runtime: python
     pythonVersion: 3.10.12
     buildCommand: "./build.sh"
-    startCommand: "gunicorn config.wsgi:application"
+    startCommand: "gunicorn config.wsgi:application --log-file -"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
