@@ -16,7 +16,10 @@ python manage.py collectstatic --no-input
 echo "--- STEP 4: Running database migrations ---"
 python manage.py migrate
 
-echo "--- STEP 5: Creating Superuser ---"
+echo "--- STEP 5: Verifying Structure ---"
+ls -d config/
+
+echo "--- STEP 6: Creating Superuser ---"
 python manage.py shell <<EOF
 from django.contrib.auth import get_user_model
 User = get_user_model()
