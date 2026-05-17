@@ -1,8 +1,11 @@
 from .base import *
+import os
 
 DEBUG = False
 
 # Security settings for production
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.onrender.com'])
+
 SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
