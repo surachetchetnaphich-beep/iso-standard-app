@@ -1,6 +1,10 @@
-django
-psycopg2-binary
-django-environ
-python-dotenv
-whitenoise
-gunicorn
+django>=3.2,<4.0
+psycopg2-binary>=2.9.9
+django-environ>=0.11.2
+python-dotenv>=0.21.1
+whitenoise[brotli]>=6.5.0
+gunicorn>=21.2.0
+uvicorn>=0.22.0
+asgiref>=3.7.2
+sqlparse>=0.4.4
+pytz>=2026.1
