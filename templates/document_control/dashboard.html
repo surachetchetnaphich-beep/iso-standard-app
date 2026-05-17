@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISO Document Control - Ultimate Peak</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.5);
+            --secondary: #0ea5e9;
+            --accent: #f43f5e;
+            --dark: #020617;
+            --surface: #ffffff;
+            --glass-white: rgba(255, 255, 255, 0.7);
+            --neon-blue: #22d3ee;
+            --neon-purple: #a855f7;
+        }
+
+        body { 
+            background-color: #f0f2f5; 
+            color: #1e293b; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        /* --- Cinematic Background --- */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Keyframes for Extreme Motion --- */
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes floating-particle {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -50px); }
+            50% { transform: translate(50px, 100px); }
+            75% { transform: translate(-50px, 50px); }
+        }
+
+        @keyframes stroke-draw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes icon-pulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 0px var(--primary-glow)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px var(--primary-glow)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 0px var(--primary-glow)); }
+        }
+
+        /* --- Navbar Upgrade --- */
+        .navbar-ultimate {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            padding: 1.5rem 0;
+        }
+        .navbar-brand-peak {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Hero Section - Cinematic --- */
+        .hero-peak {
+            background: var(--dark);
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+            margin-bottom: -15vh;
+        }
+
+        .hero-peak::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+        }
+
+        .particle {
+            position: absolute; width: 4px; height: 4px; background: var(--primary); border-radius: 50%;
+            opacity: 0.3; animation: floating-particle 20s infinite linear;
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.9;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        /* --- Search Bar Upgrade --- */
+        .ultimate-search-box {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: 40px;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .ultimate-search-inner {
+            background: var(--dark);
+            border-radius: 35px;
+            padding: 10px 10px 10px 30px;
+            display: flex;
+            align-items: center;
+        }
+        .ultimate-search-inner input {
+            background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: 500;
+        }
+        .ultimate-search-inner input:focus { box-shadow: none; }
+        
+        .btn-peak {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none; color: white; font-weight: 800; border-radius: 30px; padding: 15px 40px;
+            text-transform: uppercase; transition: all 0.4s; position: relative; overflow: hidden;
+        }
+        .btn-peak:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary-glow); }
+        .btn-peak::after {
+            content: ""; position: absolute; top: -100%; left: -100%; width: 300%; height: 300%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 50%);
+            transition: all 0.6s;
+        }
+        .btn-peak:hover::after { top: -50%; left: -50%; }
+
+        /* --- 3D Cards --- */
+        .card-peak {
+            background: white; border-radius: 40px; padding: 40px; border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            height: 100%;
+        }
+        .card-peak:hover {
+            transform: translateZ(20px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        
+        .peak-icon-animate {
+            width: 80px; height: 80px; background: #f5f3ff; border-radius: 25px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: var(--primary); margin-bottom: 25px;
+            animation: icon-pulse 3s infinite ease-in-out;
+        }
+
+        /* --- Table Style --- */
+        .table-peak { border-collapse: separate; border-spacing: 0 10px; }
+        .table-peak tr { background: white; border-radius: 20px; transition: transform 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .table-peak tr:hover { transform: scale(1.01); background: #fdfdfd; box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        .table-peak td { border: none; padding: 25px !important; }
+        .table-peak td:first-child { border-radius: 20px 0 0 20px; }
+        .table-peak td:last-child { border-radius: 0 20px 20px 0; }
+
+        /* --- Custom UI elements --- */
+        .status-pill {
+            padding: 8px 20px; border-radius: 50px; font-weight: 800; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .status-pill.published { background: #ecfdf5; color: #10b981; box-shadow: 0 0 15px rgba(16,185,129,0.2); }
+        .status-pill.review { background: #fffbeb; color: #f59e0b; box-shadow: 0 0 15px rgba(245,158,11,0.2); }
+
+        .sidebar-peak-item {
+            padding: 20px 30px; border-radius: 25px; margin-bottom: 10px;
+            background: white; border: 1px solid transparent; transition: all 0.3s;
+            display: flex; justify-content: space-between; align-items: center;
+            text-decoration: none; color: #334155; font-weight: 700;
+        }
+        .sidebar-peak-item:hover { 
+            background: var(--dark); color: white; transform: translateX(10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- Footer Visual --- */
+        .footer-peak { 
+            background: var(--dark); padding: 120px 0 60px; color: white; 
+            margin-top: 200px; clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        /* --- Reveal Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        .hover-scale { transition: transform 0.3s; }
+        .hover-scale:hover { transform: scale(1.05); }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-ultimate sticky-top">
+        <div class="container">
+            <a class="navbar-brand navbar-brand-peak" href="/">
+                <i class="bi bi-shield-fill-check me-2"></i>ISO PEAK
+            </a>
+            <div class="ms-auto d-flex align-items-center">
+                <span class="text-muted small fw-bold me-3 d-none d-md-inline">SYSTEM STATUS: <span class="text-success">ONLINE</span></span>
+                <a href="/admin/" class="btn-peak btn-sm text-decoration-none">
+                    <i class="bi bi-person-workspace me-2"></i>Control Console
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-peak">
+        <!-- Floating Particles -->
+        <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 70%; left: 80%; animation-delay: 5s;"></div>
+        <div class="particle" style="top: 40%; left: 60%; animation-delay: 2s;"></div>
+        
+        <div class="container text-center">
+            <div class="reveal">
+                <span class="badge bg-primary px-4 py-2 rounded-pill mb-4" style="letter-spacing: 3px; font-weight: 800;">INTEGRATED SYSTEM</span>
+            </div>
+            <h1 class="hero-title reveal delay-1">MAINTENANCE<br><span style="color: var(--primary);">2nd SITE</span></h1>
+            <p class="lead text-white opacity-50 reveal delay-2 mt-4 fs-4">Precision Management for International ISO & PSM Standards</p>
+            
+            <div class="ultimate-search-box reveal delay-3">
+                <form action="/" method="GET" class="ultimate-search-inner">
+                    <i class="bi bi-search fs-4 text-white opacity-50 me-3"></i>
+                    <input type="text" name="q" class="form-control" 
+                           placeholder="Search documents, personnel, or compliance logs..." value="{{ query|default:'' }}">
+                    <button type="submit" class="btn-peak">Analyze Data</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Peak Stats -->
+        <div class="row g-5 mb-5" style="margin-top: -120px;">
+            <div class="col-md-3 reveal delay-1">
+                <div class="card-peak">
+                    <div class="peak-icon-animate"><i class="bi bi-file-earmark-medical"></i></div>
+                    <div class="small fw-800 text-muted text-uppercase mb-1">Total Assets</div>
+                    <h2 class="display-4 fw-800">{{ total_docs }}</h2>
+                    <p class="small text-primary fw-bold mt-2"><i class="bi bi-arrow-up-right me-1"></i>Active Records</p>
+                </div>
+            </div>
+            <div class="col-md-3 reveal delay-2">
+                <div class="card-peak" style="border-bottom: 5px solid var(--accent);">
+                    <div class="peak-icon-animate" style="color: var(--accent); background: #fff1f2;"><i class="bi bi-exclamation-triangle"></i></div>
+                    <div class="small fw-800 text-muted text-uppercase mb-1">Pending Audit</div>
+                    <h2 class="display-4 fw-800">{{ pending_review }}</h2>
+                    <p class="small text-danger fw-bold mt-2"><i class="bi bi-clock-history me-1"></i>Action Required</p>
+                </div>
+            </div>
+            <div class="col-md-3 reveal delay-3">
+                <div class="card-peak">
+                    <div class="peak-icon-animate" style="color: var(--secondary); background: #f0f9ff;"><i class="bi bi-patch-check"></i></div>
+                    <div class="small fw-800 text-muted text-uppercase mb-1">Standards</div>
+                    <h2 class="display-4 fw-800">{{ standards.count }}</h2>
+                    <p class="small text-info fw-bold mt-2"><i class="bi bi-shield-check me-1"></i>Fully Compliant</p>
+                </div>
+            </div>
+            <div class="col-md-3 reveal delay-4">
+                <div class="card-peak">
+                    <div class="peak-icon-animate" style="color: var(--neon-purple); background: #faf5ff;"><i class="bi bi-people"></i></div>
+                    <div class="small fw-800 text-muted text-uppercase mb-1">Human Capital</div>
+                    <h2 class="display-4 fw-800">{{ total_employees }}</h2>
+                    <p class="small text-purple fw-bold mt-2" style="color: var(--neon-purple);"><i class="bi bi-mortarboard me-1"></i>Trained Staff</p>
+                </div>
+            </div>
+        </div>
+
+        {% if query %}
+        <section class="mb-5 mt-5">
+            <div class="d-flex justify-content-between align-items-center mb-5 reveal">
+                <h2 class="fw-800 display-6 text-uppercase">Analysis Results: "{{ query }}"</h2>
+                <a href="/" class="btn-peak btn-sm text-decoration-none">Reset View</a>
+            </div>
+
+            {% if search_results %}
+            <div class="mb-5">
+                <h4 class="fw-800 mb-4 reveal text-primary"><i class="bi bi-file-earmark-text me-2"></i>DOCUMENTS ({{ search_results.count }})</h4>
+                <div class="table-responsive reveal">
+                    <table class="table table-peak align-middle">
+                        <thead>
+                            <tr class="text-muted small fw-800 text-uppercase">
+                                <th class="ps-4">Identification</th>
+                                <th>Current Status</th>
+                                <th>Latest File</th>
+                                <th class="text-end pe-4">Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for doc in search_results %}
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="fw-800 text-dark fs-5">{{ doc.document_number }}</div>
+                                    <div class="text-muted fw-500">{{ doc.title }}</div>
+                                </td>
+                                <td>
+                                    <span class="status-pill {% if doc.status == 'PUBLISHED' %}published{% else %}review{% endif %}">
+                                        {{ doc.get_status_display }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if doc.latest_file %}
+                                        <a href="{{ doc.latest_file }}" class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-bold" target="_blank">
+                                            <i class="bi bi-download me-1"></i>PDF
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted opacity-50 small">No file</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end pe-4">
+                                    <a href="/admin/document_control/document/{{ doc.id }}/change/" class="btn btn-dark rounded-pill px-4 fw-bold">Explore</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if schedule_results %}
+            <div class="mb-5">
+                <h4 class="fw-800 mb-4 reveal text-secondary"><i class="bi bi-calendar-check me-2"></i>COMPLIANCE SCHEDULES ({{ schedule_results.count }})</h4>
+                <div class="table-responsive reveal">
+                    <table class="table table-peak align-middle">
+                        <thead>
+                            <tr class="text-muted small fw-800 text-uppercase">
+                                <th class="ps-4">Activity Name</th>
+                                <th>Schedule Date</th>
+                                <th>Responsible</th>
+                                <th class="text-end pe-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sch in schedule_results %}
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="fw-800 text-dark fs-5">{{ sch.title }}</div>
+                                    <div class="text-muted fw-500">{{ sch.get_activity_type_display }}</div>
+                                </td>
+                                <td>
+                                    <div class="fw-800 text-primary">{{ sch.scheduled_date|date:"d M Y" }}</div>
+                                </td>
+                                <td>{{ sch.responsible_person }}</td>
+                                <td class="text-end pe-4">
+                                    <span class="badge {% if sch.status == 'COMPLETED' %}bg-success{% elif sch.status == 'CANCELLED' %}bg-danger{% else %}bg-warning{% endif %} rounded-pill px-3 py-2">
+                                        {{ sch.get_status_display }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if employee_results %}
+            <div class="mb-5">
+                <h4 class="fw-800 mb-4 reveal text-info"><i class="bi bi-people me-2"></i>PERSONNEL ({{ employee_results.count }})</h4>
+                <div class="table-responsive reveal">
+                    <table class="table table-peak align-middle">
+                        <thead>
+                            <tr class="text-muted small fw-800 text-uppercase">
+                                <th class="ps-4">Employee Name</th>
+                                <th>ID</th>
+                                <th>Department</th>
+                                <th class="text-end pe-4">Profile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for emp in employee_results %}
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="fw-800 text-dark fs-5">{{ emp.first_name }} {{ emp.last_name }}</div>
+                                    <div class="text-muted fw-500">{{ emp.position }}</div>
+                                </td>
+                                <td><code class="text-primary fw-bold">{{ emp.employee_id }}</code></td>
+                                <td>{{ emp.department.name }}</td>
+                                <td class="text-end pe-4">
+                                    <a href="/admin/document_control/employee/{{ emp.id }}/change/" class="btn btn-outline-dark rounded-pill px-4 fw-bold">View History</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if not search_results and not schedule_results and not employee_results %}
+            <div class="text-center py-5 reveal">
+                <i class="bi bi-search display-1 text-muted opacity-25"></i>
+                <p class="lead mt-3 text-muted">No tactical data found for "{{ query }}"</p>
+            </div>
+            {% endif %}
+        </section>
+        {% endif %}
+
+        <div class="row g-5 mt-5">
+            <div class="col-lg-8">
+                <h4 class="fw-800 mb-4 reveal">RECENTLY UPDATED</h4>
+                <div class="reveal delay-1">
+                    <div class="table-responsive">
+                        <table class="table table-peak align-middle">
+                            <tbody>
+                                {% for doc in recent_docs %}
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="fw-800 text-dark">{{ doc.document_number }}</div>
+                                        <div class="small text-muted">{{ doc.title }}</div>
+                                    </td>
+                                    <td>
+                                        <span class="status-pill {% if doc.status == 'PUBLISHED' %}published{% else %}review{% endif %} small">
+                                            {{ doc.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end pe-4">
+                                        <a href="/admin/document_control/document/{{ doc.id }}/change/" class="text-primary hover-scale d-inline-block transition">
+                                            <i class="bi bi-arrow-right-circle fs-4"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h4 class="fw-800 mb-4 mt-5 reveal">CRITICAL TIMELINE</h4>
+                <div class="reveal delay-2">
+                    {% for item in upcoming_schedules %}
+                    <div class="card-peak p-4 mb-3 hover-scale" style="border-radius: 25px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary-subtle text-primary p-3 rounded-4 me-4">
+                                    <i class="bi bi-calendar-event fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-800 mb-0">{{ item.title }}</h5>
+                                    <div class="small text-muted fw-600 mt-1">{{ item.get_activity_type_display }} | {{ item.responsible_person }}</div>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-800 fs-3" style="color: var(--primary);">{{ item.scheduled_date|date:"d" }}</div>
+                                <div class="text-muted fw-800 text-uppercase small">{{ item.scheduled_date|date:"M Y" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="alert alert-light border-0 rounded-4 p-4 text-center">
+                        <i class="bi bi-calendar-check fs-2 text-muted mb-3 d-block"></i>
+                        <span class="text-muted fw-600">No upcoming activities scheduled.</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <h4 class="fw-800 mb-4 reveal">SYSTEM NODES</h4>
+                <div class="reveal delay-1">
+                    {% for std in standards %}
+                    <a href="/admin/document_control/document/?standard_type__id__exact={{ std.id }}" class="sidebar-peak-item">
+                        <span>{{ std.name }}</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-circle" style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">{{ std.documents.count }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+
+                <div class="card-peak bg-dark text-white p-5 mt-5 reveal delay-3" style="border-radius: 40px; background: linear-gradient(135deg, #020617 0%, #1e1b4b 100%) !important;">
+                    <i class="bi bi-shield-lock-fill display-4 mb-4 text-primary"></i>
+                    <h4 class="fw-800">Security & Integrity</h4>
+                    <p class="opacity-50 small mb-4">All document operations are logged and versioned according to ISO 9001/PSM standards. Maintain 100% traceability.</p>
+                    <a href="/admin/" class="btn-peak btn-sm w-100 text-center text-decoration-none">Access Audit Logs</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-peak">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <h2 class="navbar-brand-peak mb-4">ISO PEAK</h2>
+                    <p class="fs-5 opacity-50" style="max-width: 500px;">The next generation of document compliance and process safety management. Built for industry leaders who demand perfection.</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <h6 class="fw-800 mb-4 text-uppercase letter-spacing-2">Resources</h6>
+                    <div class="d-flex justify-content-lg-end gap-4">
+                        <a href="/" class="text-decoration-none text-white opacity-50 hover-opacity-100 transition">Analytics</a>
+                        <a href="/admin/" class="text-decoration-none text-white opacity-50 hover-opacity-100 transition">Console</a>
+                        <a href="#" class="text-decoration-none text-white opacity-50 hover-opacity-100 transition">Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-5 mt-5 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center opacity-50 small">
+                <div>&copy; 2026 MAINTENANCE 2nd SITE. ALL RIGHTS RESERVED.</div>
+                <div class="d-flex gap-3">
+                    <i class="bi bi-facebook"></i>
+                    <i class="bi bi-linkedin"></i>
+                    <i class="bi bi-twitter-x"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Reveal on Scroll Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+        
+        // Instant check
+        reveal();
+    </script>
+</body>
+</html>
