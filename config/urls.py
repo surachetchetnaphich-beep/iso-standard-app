@@ -5,9 +5,10 @@ from django.conf.urls.static import static
 from apps.document_control.views import dashboard
 
 urlpatterns = [
-    path('', dashboard, name='dashboard'),
     path('admin/', admin.site.urls),
+    path('', dashboard, name='dashboard'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files in production (since we use a persistent disk)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
