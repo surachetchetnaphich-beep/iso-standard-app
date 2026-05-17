@@ -65,11 +65,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/stable/ref/settings/#databases
-if env('DATABASE_URL', default=None):
-    DATABASES = {
-        'default': env.db(),
-    }
-else:
+try:
+    if env('DATABASE_URL', default=None):
+        DATABASES = {
+            'default': env.db(),
+        }
+    else:
+        raise ValueError("DATABASE_URL not found")
+except Exception:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
