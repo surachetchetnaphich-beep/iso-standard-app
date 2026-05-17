@@ -1,10 +1,11 @@
 from .base import *
 import os
 
-DEBUG = False
+# TEMPORARY DEBUG FOR DIAGNOSIS
+DEBUG = True
 
 # Security settings for production
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = ['*']
 
 SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
 SESSION_COOKIE_SECURE = True
